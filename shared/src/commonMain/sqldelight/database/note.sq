@@ -1,16 +1,14 @@
 CREATE TABLE noteEntity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    date TEXT NOT NULL,
-    image TEXT NOT NULL,
     content TEXT NOT NULL,
-    colorHex INTEGER NOT NULL
+    colorHex INTEGER NOT NULL,
+    created INTEGER NOT NULL
 );
 
 getAllNotes:
 SELECT *
 FROM noteEntity;
-
 
 getNoteById:
 SELECT *
@@ -22,11 +20,10 @@ INSERT OR REPLACE
 INTO noteEntity(
     id,
     title,
-    date,
-    image,
     content,
-    colorHex
-) VALUES(?,?,?, ?, ?, ?);
+    colorHex,
+    created
+) VALUES(?, ?, ?, ?, ?);
 
 deleteNoteById:
 DELETE FROM noteEntity
