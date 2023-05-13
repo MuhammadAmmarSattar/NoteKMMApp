@@ -1,5 +1,6 @@
 package com.ammar.notekmmapp.data.note
 
+import com.ammar.notekmmapp.android.database.NoteDatabase
 import com.ammar.notekmmapp.domain.note.Note
 import com.ammar.notekmmapp.domain.note.NoteDataSource
 import com.ammar.notekmmapp.domain.time.DateTimeUtils.DateTimeUtil

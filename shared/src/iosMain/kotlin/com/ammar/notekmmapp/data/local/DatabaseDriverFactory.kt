@@ -1,5 +1,6 @@
 package com.ammar.notekmmapp.data.local
 
+import com.ammar.notekmmapp.android.database.NoteDatabase
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 
