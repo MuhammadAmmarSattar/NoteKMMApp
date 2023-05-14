@@ -73,5 +73,4 @@ fun NoteItem(
             modifier = Modifier.align(Alignment.End)
         )
     }
-
 }

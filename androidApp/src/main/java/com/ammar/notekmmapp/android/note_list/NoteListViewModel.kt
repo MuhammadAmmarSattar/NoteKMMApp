@@ -6,12 +6,16 @@ import androidx.lifecycle.viewModelScope
 import com.ammar.notekmmapp.domain.note.Note
 import com.ammar.notekmmapp.domain.note.NoteDataSource
 import com.ammar.notekmmapp.domain.note.SearchNotes
+import com.ammar.notekmmapp.domain.time.DateTimeUtils.DateTimeUtil
+import com.ammar.notekmmapp.presentation.LightGreenHex
+import com.ammar.notekmmapp.presentation.RedOrangeHex
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+import kotlinx.datetime.DateTimePeriod
 
 @HiltViewModel
 class NoteListViewModel @Inject constructor(
@@ -32,6 +36,21 @@ class NoteListViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), NoteListState())
 
+
+    init {
+        viewModelScope.launch {
+            (1..10).forEach{
+                    noteDataSource.insertNote(Note(
+                        id = null,
+                        title = "Note${it}",
+                        content = "Content$it",
+                        colorHex = LightGreenHex,
+                        created = DateTimeUtil.now()
+                    ))
+            }
+        }
+
+    }
     fun loadNotes() {
         viewModelScope.launch {
             savedStateHandle["notes"] = noteDataSource.getAllNotes()

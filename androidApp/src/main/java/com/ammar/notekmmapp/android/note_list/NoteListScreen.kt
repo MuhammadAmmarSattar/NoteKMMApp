@@ -35,7 +35,7 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteListScreen(
-    navController: NavController,
+    navController: NavController?=null,
     viewModel: NoteListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -48,7 +48,7 @@ fun NoteListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate("note_detail/-1L")
+//                    navController?.navigate("note_detail/-1L")
                 },
                 backgroundColor = Color.Black
             ) {
@@ -79,18 +79,17 @@ fun NoteListScreen(
                         .fillMaxWidth()
                         .height(90.dp)
                 )
-            }
-
-            this@Column.AnimatedVisibility(
-                visible = !state.isSearchActive,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                Text(
-                    text = "All notes",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp
-                )
+                this@Column.AnimatedVisibility(
+                    visible = !state.isSearchActive,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    Text(
+                        text = "All notes",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp
+                    )
+                }
             }
 
             LazyColumn(
@@ -104,7 +103,7 @@ fun NoteListScreen(
                         note = note,
                         backgroundColor = Color(note.colorHex),
                         onNoteClick = {
-                            navController.navigate("note_detail/${note.id}")
+//                            navController.navigate("note_detail/${note.id}")
                         },
                         onDeleteClick = {
                             viewModel.deleteNoteById(note.id!!)
@@ -118,5 +117,4 @@ fun NoteListScreen(
             }
         }
     }
-
 }
